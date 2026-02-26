@@ -9,6 +9,8 @@ import org.crac.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.amazonaws.serverless.exceptions.ContainerInitializationException;
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
@@ -20,7 +22,7 @@ import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import software.amazonaws.Application;
 import software.amazonaws.example.product.dao.ProductDao;
 
-
+@Service
 public class StreamLambdaHandlerWithDSQLPriming implements RequestStreamHandler, Resource {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StreamLambdaHandlerWithDSQLPriming.class);

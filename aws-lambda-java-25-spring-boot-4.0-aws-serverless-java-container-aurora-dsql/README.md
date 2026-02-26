@@ -4,7 +4,7 @@
 ## Architecture
 
 <p align="center">
-  <img src="/aws-lambda-java-25-aurora-dsql/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
+  <img src="/aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
 </p>
 
 ## Installation and deployment

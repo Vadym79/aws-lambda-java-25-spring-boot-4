@@ -70,7 +70,7 @@ public class StreamLambdaHandlerWithFullPriming implements RequestStreamHandler,
     private static AwsProxyRequest getAwsProxyRequest () {
     	final AwsProxyRequest awsProxyRequest = new AwsProxyRequest ();
     	awsProxyRequest.setHttpMethod("GET");
-    	awsProxyRequest.setPath("/products/0");
+    	awsProxyRequest.setPath("/productsWithFullPriming/0");
     	//awsProxyRequest.setResource("/products/{id}");
     	awsProxyRequest.setPathParameters(Map.of("id","0"));
     	
