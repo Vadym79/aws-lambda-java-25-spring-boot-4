@@ -47,6 +47,28 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
+		    <exclusions>
+		       <exclusion>
+                       <groupId>ch.qos.logback</groupId>
+                       <artifactId>logback-classic</artifactId>
+                </exclusion>
+                 <exclusion>
+                       <groupId>ch.qos.logback</groupId>
+                       <artifactId>logback-core</artifactId>
+                 </exclusion>
+                 <exclusion>
+                       <groupId>org.apache.logging.log4j</groupId>
+                       <artifactId>log4j-api</artifactId>
+                 </exclusion>     
+                 <exclusion>
+                       <groupId>org.apache.logging.log4j</groupId>
+                       <artifactId>log4j-to-slf4j</artifactId>                 
+                 </exclusion>     
+                <exclusion>
+                       <groupId>org.slf4j</groupId>
+                       <artifactId>jul-to-slf4j</artifactId>
+                </exclusion>     
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws.serverless</groupId>
@@ -135,6 +157,14 @@
 									<exclude>org.apache.tomcat.embed:*</exclude>
 								</excludes>
 							</artifactSet>
+							<filters>
+		                       <filter>
+		                          <artifact>*:*</artifact>
+		                          <excludes>
+		                              <exclude>META-INF/services/org.hibernate.bytecode.spi.BytecodeProvider</exclude>
+		                          </excludes>
+		                       </filter>
+		                   </filters>
 						</configuration>
 					</execution>
 				</executions>
@@ -161,16 +191,13 @@
 				               <buildArg> --no-fallback </buildArg>
 				               <buildArg> --enable-http </buildArg>
 				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
-				               <buildArg> -H:ResourceConfigurationFiles=src/main/resource-config.json </buildArg>
 				               <buildArg> -H:Preserve=package=org.hibernate.event.spi</buildArg>
 							</buildArgs>
-							<!--
 							<classpath>
 								<param>
 									${project.build.directory}/${project.artifactId}-${project.version}.jar
 								</param>
 							</classpath>
-							-->
 						</configuration>
 						<executions>
 							<execution>
