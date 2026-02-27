@@ -1,8 +1,6 @@
 package software.amazonaws;
 
-import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS;
-import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_METHODS;
-import static org.springframework.aot.hint.MemberCategory.ACCESS_PUBLIC_FIELDS;
+import static org.springframework.aot.hint.MemberCategory.*;
 
 import java.util.HashSet;
 
@@ -20,7 +18,7 @@ import software.amazonaws.example.product.entity.Product;
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class})
+	Product.class, PersistenceJPAConfig.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 
@@ -34,7 +32,11 @@ public class ApplicationConfiguration {
                    .registerType(
                             Product.class,
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
-                    );
+                   )
+                   .registerType(
+                           PersistenceJPAConfig.class, 
+                           ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
+                   );
         }
     }
 
