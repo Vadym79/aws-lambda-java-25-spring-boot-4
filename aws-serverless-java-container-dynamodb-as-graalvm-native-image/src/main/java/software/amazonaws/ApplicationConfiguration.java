@@ -3,6 +3,7 @@ package software.amazonaws;
 import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS;
 import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_METHODS;
 import static org.springframework.aot.hint.MemberCategory.ACCESS_PUBLIC_FIELDS;
+import static org.springframework.aot.hint.MemberCategory.ACCESS_DECLARED_FIELDS;
 
 import java.util.HashSet;
 
@@ -40,7 +41,7 @@ public class ApplicationConfiguration {
                             Products.class,
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     ).registerType(
-                    		StreamLambdaHandler.class,
+                    		StreamLambdaHandler.class, ACCESS_DECLARED_FIELDS,
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     );
         }
