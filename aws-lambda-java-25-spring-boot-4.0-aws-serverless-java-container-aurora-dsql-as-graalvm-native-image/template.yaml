@@ -1,13 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  AWSLambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB as GraalVM Native Image
+  AWSLambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and Aurora DSQL as GraalVM Native Image
   Sample SAM Template 
 
 Parameters:
   Stage:
     Type: String
-    Default: prod 
+    Default: prod
     
 Globals:
   Function:
@@ -20,17 +20,17 @@ Globals:
       Variables:
         REGION: !Sub ${AWS::Region}
         PRODUCT_TABLE_NAME: !Ref ProductsTable
-        MAIN_CLASS: com.amazonaws.Application
-        
-        
+        MAIN_CLASS: com.amazonaws.Application        
+        AURORA_DSQL_CLUSTER_ENDPOINT: !Sub ${DSQL}.dsql.${AWS::Region}.on.aws
+
 Resources:
   MyApi:
     Type: AWS::Serverless::Api
     DependsOn: MyApiCWLRoleArn 
     Properties:
       StageName: !Ref Stage
-      Name: AWSLambdaSpringBoot40AWSServerlessJavaContainerDynamoDBAsGVNIAPI
-      Description: Product API using AWS Lambda Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB
+      Name: AWSLambdaSpringBoot40AWSServerlessJavaContainerDSQLAsGVNIAPI
+      Description: Product API using AWS Lambda Java 25 Spring Boot 4.0 AWS Serverless Java Container and Aurora DSQL
       AccessLogSetting:
         DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
         Format: "{'integrationLatency':'$context.integrationLatency', 'latency':'$context.responseLatency', 'requestId':'$context.requestId', 'ip': '$context.identity.sourceIp', 'caller':'$context.identity.caller', 'user':'$context.identity.user','requestTime':'$context.requestTime', 'xrayTraceId':'$context.xrayTraceId', 'wafResponseCode':'$context.wafResponseCode', 'httpMethod':'$context.httpMethod','resourcePath':'$context.resourcePath', 'status':'$context.status','protocol':'$context.protocol', 'responseLength':'$context.responseLength' }"
@@ -77,8 +77,8 @@ Resources:
       ApiStages: 
         - ApiId: !Ref MyApi
           Stage: !Ref Stage
-      UsagePlanName: AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPIUsagePlan
-      Description: Usage plan for AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPI
+      UsagePlanName: AWSLambdaJava25SpringBoot40AWSSJCDSQLAsGVNIAPIUsagePlan
+      Description: Usage plan for AWSLambdaJava25SpringBoot40AWSSJCDSQLAsGVNIAPI
       Quota:
           Limit: 2000000
           Period: DAY
@@ -91,11 +91,11 @@ Resources:
     DependsOn:  
        - MyApiStage
     Properties: 
-      Name: "AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIApiKey"
-      Description: "AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNI API Key"
+      Name: "AWSLambdaJava25SpringBoot40AWSSJCDSQLAsGVNIApiKey"
+      Description: "AWSLambdaJava25SpringBoot40AWSSJCDSQLAsGVNI API Key"
       Enabled: true
       GenerateDistinctId: false
-      Value: a6ZbcDefQW12BN56WEI40GVNI
+      Value: a6ZbcDefQW12BN56WEI40DSGVNI
       StageKeys:
         - RestApiId: !Ref MyApi
           StageName: !Ref Stage
@@ -112,10 +112,16 @@ Resources:
   PostProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: PostProductWithJava25SpringBoot40AWSSJCDynamoDBAsGVNI
+      FunctionName: PostProductWithJava25SpringBoot40AWSSJCDSQLAsGVNI
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref ProductsTable
+        - Version: '2012-10-17' # Policy Document
+          Statement:
+            - Effect: Allow
+              Action:
+                - dsql:DbConnectAdmin
+              Resource: 
+                 - !Sub arn:${AWS::Partition}:dsql:${AWS::Region}:${AWS::AccountId}:cluster/${DSQL}
+
       Events:
         PutRequest:
           Type: Api
@@ -134,10 +140,16 @@ Resources:
   GetProductByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCDynamoDBAsGVNI
+      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCDSQLAsGVNI
       Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref ProductsTable
+        - Version: '2012-10-17' # Policy Document
+          Statement:
+            - Effect: Allow
+              Action:
+                - dsql:DbConnectAdmin
+              Resource: 
+                 - !Sub arn:${AWS::Partition}:dsql:${AWS::Region}:${AWS::AccountId}:cluster/${DSQL}
+
       Events:
         GetRequestById:
           Type: Api
@@ -145,6 +157,7 @@ Resources:
             RestApiId: !Ref MyApi
             Path: /products/{id}
             Method: get            
+            
 
   GetProductByIdFunctionLogGroup:
     Type: AWS::Logs::LogGroup
@@ -153,25 +166,13 @@ Resources:
       RetentionInDays: 7
 
  
-  ProductsTable:
-    Type: AWS::DynamoDB::Table
+  DSQL:
+    Type: AWS::DSQL::Cluster
     Properties:
-      TableName: "AWSLambdaJava25SpringBoot40AWSSJCAsGVNIProductsTable"
-      PointInTimeRecoverySpecification:
-         PointInTimeRecoveryEnabled: true
-      AttributeDefinitions:
-        - AttributeName: 'PK'
-          AttributeType: 'S'
-      KeySchema:
-        - AttributeName: 'PK'
-          KeyType: 'HASH'
-      BillingMode: PAY_PER_REQUEST    
-      #ProvisionedThroughput: 
-        #ReadCapacityUnits: "1"
-        #WriteCapacityUnits: "1"
+      DeletionProtectionEnabled: true 
       
 
 Outputs:
-  AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPIEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB as GraalVM Native Image"
+  AWSLambdaJava25SpringBoot40AWSSJCDSQLAsGVNIAPIEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and Aurora DSQL as GraalVM Native Image"
     Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"

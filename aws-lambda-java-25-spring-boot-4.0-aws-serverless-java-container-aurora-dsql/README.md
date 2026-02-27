@@ -1,4 +1,4 @@
-# Example of Lambda with managed Java 25 runtime using Hibernate as an ORM framework and Amazon Aurora DSQL database 
+# Example of Lambda with managed Java 25 runtime using Spring Boot 4 with AWS Serverless Java Container, Hibernate as an ORM framework, Hikari Connection Pool and Amazon Aurora DSQL database 
 
 
 ## Architecture
@@ -9,7 +9,6 @@
 
 ## Installation and deployment
 
-aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql
 ```bash
 ## Clone git repository locally  
 git clone https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git

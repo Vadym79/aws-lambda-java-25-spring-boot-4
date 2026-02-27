@@ -1,4 +1,4 @@
-# Example of Lambda with managed Java 25 runtime using Amazon DynamoDB  
+# Example of Lambda with managed Java 25 runtime using Spring Boot 4 with AWS Serverless Java Containerand Amazon DynamoDB  
 
 
 ## Architecture

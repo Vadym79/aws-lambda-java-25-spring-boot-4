@@ -114,6 +114,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
+      #Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler
       FunctionName: PostProductWithJava25SpringBoot40AWSSJCDynamoDB
       AutoPublishAlias: liveVersion
       Policies:
