@@ -154,12 +154,23 @@
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
+						<version>0.11.4</version>
 						<configuration>
 							<mainClass>software.amazonaws.Application</mainClass>
-							<buildArgs>
-								--enable-url-protocols=http
-								-H:+AddAllCharsets
+		                     <buildArgs>
+				               <buildArg> --no-fallback </buildArg>
+				               <buildArg> --enable-http </buildArg>
+				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
+				               <buildArg> -H:ResourceConfigurationFiles=src/main/resource-config.json </buildArg>
+				               <buildArg> -H:Preserve=package=org.hibernate.event.spi</buildArg>
 							</buildArgs>
+							<!--
+							<classpath>
+								<param>
+									${project.build.directory}/${project.artifactId}-${project.version}.jar
+								</param>
+							</classpath>
+							-->
 						</configuration>
 						<executions>
 							<execution>

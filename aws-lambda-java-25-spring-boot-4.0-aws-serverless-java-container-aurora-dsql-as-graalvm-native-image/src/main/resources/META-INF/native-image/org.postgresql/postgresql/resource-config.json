@@ -1,0 +1,18 @@
+{
+  "resources":{
+  "includes":[
+	{
+    "pattern":"\\Qorg/hibernate/hibernate-mapping-3.0.dtd\\E"
+  },
+	{
+	"pattern":"\\Qorg/hibernate/hibernate-mapping-4.0.xsd\\E"
+	},
+	{
+	"pattern":"\\Qorg/hibernate/hibernate-configuration-3.0.dtd\\E"
+	},
+	{
+	"pattern":"\\Qorg/hibernate/hibernate-configuration-4.0.xsd\\E"
+	}
+  ]},
+  "bundles":[]
+}
