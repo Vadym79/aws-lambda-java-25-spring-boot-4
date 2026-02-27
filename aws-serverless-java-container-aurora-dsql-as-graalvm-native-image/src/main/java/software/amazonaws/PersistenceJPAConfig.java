@@ -9,6 +9,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import org.springframework.orm.jpa.persistenceunit.PersistenceManagedTypes;
+import org.springframework.orm.jpa.persistenceunit.PersistenceManagedTypesScanner;
+import org.springframework.core.io.ResourceLoader;
+
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -29,10 +33,11 @@ public class PersistenceJPAConfig {
 
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(PersistenceManagedTypes persistenceManagedTypes) {
 		var em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
 		em.setPackagesToScan("software.amazonaws.example.product.entity");
+		em.setManagedTypes(persistenceManagedTypes);
 
 		var vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -56,10 +61,17 @@ public class PersistenceJPAConfig {
 		return new HikariDataSource(config);
 	}
 
+	
+    @Bean
+    PersistenceManagedTypes persistenceManagedTypes(ResourceLoader resourceLoader) {
+        return new PersistenceManagedTypesScanner(resourceLoader)
+                .scan("software.amazonaws.example.product.entity");
+    }
+	
 	@Bean
-	public PlatformTransactionManager transactionManager() {
+	public PlatformTransactionManager transactionManager(PersistenceManagedTypes persistenceManagedTypes) {
 		var transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+		transactionManager.setEntityManagerFactory(entityManagerFactory(persistenceManagedTypes).getObject());
 		return transactionManager;
 	}
 
