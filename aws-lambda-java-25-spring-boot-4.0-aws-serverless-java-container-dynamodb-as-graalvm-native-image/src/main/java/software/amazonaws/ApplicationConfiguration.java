@@ -2,7 +2,7 @@ package software.amazonaws;
 
 import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS;
 import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_METHODS;
-import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
+import static org.springframework.aot.hint.MemberCategory.ACCESS_PUBLIC_FIELDS;
 
 import java.util.HashSet;
 
@@ -34,10 +34,10 @@ public class ApplicationConfiguration {
             hints.reflection()
                    .registerType(
                             Product.class,
-                            PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
+                            ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     ).registerType(
                             Products.class,
-                            PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
+                            ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     );
         }
     }
