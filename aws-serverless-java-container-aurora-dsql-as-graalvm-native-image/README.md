@@ -4,7 +4,7 @@
 ## Architecture
 
 <p align="center">
-  <img src="aws-serverless-java-container-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
+  <img src="/aws-serverless-java-container-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
 </p>
 
 ## Installation and deployment
