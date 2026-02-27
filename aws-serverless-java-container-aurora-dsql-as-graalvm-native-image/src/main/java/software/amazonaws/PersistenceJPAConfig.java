@@ -31,12 +31,13 @@ public class PersistenceJPAConfig {
 			+ ":5432/postgres?sslmode=verify-full&sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory"
 			+ "&token-duration-secs=900";
 
+	private static final String PACKAGE_TO_SCAN_FOR_ENTITIES= "software.amazonaws.example.product.entity";
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(PersistenceManagedTypes persistenceManagedTypes) {
 		var em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan("software.amazonaws.example.product.entity");
+		em.setPackagesToScan(PACKAGE_TO_SCAN_FOR_ENTITIES);
 		em.setManagedTypes(persistenceManagedTypes);
 
 		var vendorAdapter = new HibernateJpaVendorAdapter();
@@ -65,7 +66,7 @@ public class PersistenceJPAConfig {
     @Bean
     public PersistenceManagedTypes persistenceManagedTypes(ResourceLoader resourceLoader) {
         return new PersistenceManagedTypesScanner(resourceLoader)
-                .scan("software.amazonaws.example.product.entity");
+                .scan(PACKAGE_TO_SCAN_FOR_ENTITIES);
     }
 	
 	@Bean
