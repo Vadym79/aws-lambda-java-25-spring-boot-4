@@ -63,7 +63,7 @@ public class PersistenceJPAConfig {
 
 	
     @Bean
-    PersistenceManagedTypes persistenceManagedTypes(ResourceLoader resourceLoader) {
+    public PersistenceManagedTypes persistenceManagedTypes(ResourceLoader resourceLoader) {
         return new PersistenceManagedTypesScanner(resourceLoader)
                 .scan("software.amazonaws.example.product.entity");
     }
