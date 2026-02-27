@@ -7,19 +7,21 @@ Description: >
 Parameters:
   Stage:
     Type: String
-    Default: prod
+    Default: prod 
     
 Globals:
   Function:
     Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler 
-    CodeUri: target/function-native-zip.zip
+    CodeUri: target/function.zip
     Runtime: provided.al2023
     Timeout: 30 
     MemorySize: 1024
     Environment:
       Variables:
+        REGION: !Sub ${AWS::Region}
         PRODUCT_TABLE_NAME: !Ref ProductsTable
         MAIN_CLASS: com.amazonaws.Application
+        
         
         
 Resources:

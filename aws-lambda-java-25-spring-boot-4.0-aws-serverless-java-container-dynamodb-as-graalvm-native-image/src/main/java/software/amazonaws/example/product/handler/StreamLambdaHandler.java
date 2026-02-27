@@ -30,7 +30,7 @@ public class StreamLambdaHandler implements RequestStreamHandler{
             throw new RuntimeException("Could not initialize Spring Boot application", e);
         }
     }
-    
+     
 
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)
