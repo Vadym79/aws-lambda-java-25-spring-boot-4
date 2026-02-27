@@ -1,0 +1,176 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWSLambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB as GraalVM Native Image
+  Sample SAM Template 
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    
+Globals:
+  Function:
+    Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler 
+    CodeUri: target/function-native-zip.zip
+    Runtime: provided.al2023
+    Timeout: 30 
+    MemorySize: 1024
+    Environment:
+      Variables:
+        PRODUCT_TABLE_NAME: !Ref ProductsTable
+        MAIN_CLASS: com.amazonaws.Application
+        
+        
+Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    DependsOn: MyApiCWLRoleArn 
+    Properties:
+      StageName: !Ref Stage
+      Name: AWSLambdaSpringBoot40AWSServerlessJavaContainerDynamoDBAsGVNIAPI
+      Description: Product API using AWS Lambda Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB
+      AccessLogSetting:
+        DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
+        Format: "{'integrationLatency':'$context.integrationLatency', 'latency':'$context.responseLatency', 'requestId':'$context.requestId', 'ip': '$context.identity.sourceIp', 'caller':'$context.identity.caller', 'user':'$context.identity.user','requestTime':'$context.requestTime', 'xrayTraceId':'$context.xrayTraceId', 'wafResponseCode':'$context.wafResponseCode', 'httpMethod':'$context.httpMethod','resourcePath':'$context.resourcePath', 'status':'$context.status','protocol':'$context.protocol', 'responseLength':'$context.responseLength' }"
+      #MethodSettings:
+       # - MetricsEnabled: True
+       #   ResourcePath: '/*'
+       #   HttpMethod: '*'
+      Auth:
+        ApiKeyRequired: true  # sets for all methods
+
+
+  MyApiCWLRoleArn:
+   Type: AWS::ApiGateway::Account
+   Properties: 
+      CloudWatchRoleArn: !GetAtt CloudWatchRole.Arn
+      
+  # IAM Role for API GW + CWL
+  CloudWatchRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+        Path: /
+        ManagedPolicyArns:
+          - 'arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs'         
+        
+  MyApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+       LogGroupName: !Sub "/aws/apigateway/${MyApi}"
+       RetentionInDays: 7
+
+
+  MyApiUsagePlan:
+     Type: AWS::ApiGateway::UsagePlan
+     DependsOn:  
+        - MyApiStage
+     Properties:
+      ApiStages: 
+        - ApiId: !Ref MyApi
+          Stage: !Ref Stage
+      UsagePlanName: AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPIUsagePlan
+      Description: Usage plan for AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPI
+      Quota:
+          Limit: 2000000
+          Period: DAY
+      Throttle:
+          RateLimit:  10000
+          BurstLimit: 50000   
+
+  MyApiKey: 
+    Type: AWS::ApiGateway::ApiKey
+    DependsOn:  
+       - MyApiStage
+    Properties: 
+      Name: "AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIApiKey"
+      Description: "AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNI API Key"
+      Enabled: true
+      GenerateDistinctId: false
+      Value: a6ZbcDefQW12BN56WEI40GVNI
+      StageKeys:
+        - RestApiId: !Ref MyApi
+          StageName: !Ref Stage
+
+  MyApiUsagePlanKey:
+      Type: "AWS::ApiGateway::UsagePlanKey"
+      DependsOn: 
+      - MyApi
+      Properties:
+        KeyId: !Ref MyApiKey
+        KeyType: API_KEY
+        UsagePlanId: !Ref MyApiUsagePlan
+
+  PostProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PostProductWithJava25SpringBoot40AWSSJCDynamoDBAsGVNI
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        PutRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /products
+            Method: post
+
+  PostProductFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${PostProductFunction}"
+      RetentionInDays: 7
+
+ 
+  GetProductByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCDynamoDBAsGVNI
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        GetRequestById:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /products/{id}
+            Method: get            
+
+  GetProductByIdFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdFunction}"
+      RetentionInDays: 7
+
+ 
+  ProductsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "AWSLambdaJava25SpringBoot40AWSSJCAsGVNIProductsTable"
+      PointInTimeRecoverySpecification:
+         PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: 'PK'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'PK'
+          KeyType: 'HASH'
+      BillingMode: PAY_PER_REQUEST    
+      #ProvisionedThroughput: 
+        #ReadCapacityUnits: "1"
+        #WriteCapacityUnits: "1"
+      
+
+Outputs:
+  AWSLambdaJava25SpringBoot40AWSSJCDynamoDBAsGVNIAPIEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda with Java 25 Spring Boot 4.0 AWS Serverless Java Container and DynamoDB as GraalVM Native Image"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"
