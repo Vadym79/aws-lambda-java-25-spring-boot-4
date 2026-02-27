@@ -19,7 +19,6 @@ Globals:
     Environment:
       Variables:
         REGION: !Sub ${AWS::Region}
-        PRODUCT_TABLE_NAME: !Ref ProductsTable
         MAIN_CLASS: com.amazonaws.Application        
         AURORA_DSQL_CLUSTER_ENDPOINT: !Sub ${DSQL}.dsql.${AWS::Region}.on.aws
 
