@@ -4,7 +4,7 @@
 ## Architecture
 
 <p align="center">
-  <img src="aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
+  <img src="aws-serverless-java-container-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
 </p>
 
 ## Installation and deployment
@@ -27,7 +27,7 @@ sudo yum install maven
 ## Clone git repository locally  
 git clone https://github.com/Vadym79/https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git 
 
-## Switch to aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql directory   
+## Switch to aws-serverless-java-container-aurora-dsql-as-graalvm-native-image directory   
 
 ## Compile and package the Java application with Maven from the root (where pom.xml is located) of the project
 

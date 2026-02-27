@@ -4,7 +4,7 @@
 ## Architecture
 
 <p align="center">
-  <img src="/aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
+  <img src="/aws-serverless-java-container-aurora-dsql/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
 </p>
 
 ## Installation and deployment
@@ -13,7 +13,7 @@
 ## Clone git repository locally  
 git clone https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git
 
-## Switch to the aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsq  
+## Switch to the aws-serverless-java-container-aurora-dsql directory  
 ## Compile and package the Java application with Maven from the root (where pom.xml is located) of the project
 
 mvn clean package
