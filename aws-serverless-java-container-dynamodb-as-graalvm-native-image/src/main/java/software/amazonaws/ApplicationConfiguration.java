@@ -17,11 +17,12 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import software.amazonaws.example.product.entity.Product;
 import software.amazonaws.example.product.entity.Products;
+import software.amazonaws.example.product.handler.StreamLambdaHandler;
 
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class, Products.class})
+	Product.class, Products.class, StreamLambdaHandler.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 
@@ -37,6 +38,9 @@ public class ApplicationConfiguration {
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     ).registerType(
                             Products.class,
+                            ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
+                    ).registerType(
+                    		StreamLambdaHandler.class,
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
                     );
         }
