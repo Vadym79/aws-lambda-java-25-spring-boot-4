@@ -25,7 +25,7 @@ public class ProductController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-	@RequestMapping(path = {"/products/{id}","/productsWithDynamoDBPriming/{id}", "/productsWithFullPriming/{id}"}, 
+	@RequestMapping(path = {"/products/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Optional<Product> getProductById(@PathVariable("id") String id) {
 		logger.info("entered getProductById method with id " + id);
@@ -38,10 +38,12 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void createProduct(@RequestBody Product product) {
-		logger.info("entered createProduct method with id: " + product.id());
+	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+	   produces = MediaType.TEXT_PLAIN_VALUE)
+	public String createProduct(@RequestBody Product product) {
+		logger.info("entered createProduct method with id " + product.id());
 		productDao.createProduct(product);
-		logger.info("created product with id: " + product.id());
+		logger.info("created product with id " + product.id());
+		return "Product with id: "+ product.id() + " created ";
 	}
 }
