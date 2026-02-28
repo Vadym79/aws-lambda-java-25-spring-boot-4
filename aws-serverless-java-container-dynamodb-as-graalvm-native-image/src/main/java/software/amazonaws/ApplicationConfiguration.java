@@ -20,7 +20,7 @@ import software.amazonaws.example.product.handler.StreamLambdaHandler;
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class, Products.class, StreamLambdaHandler.class})
+	Product.class, Products.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 
