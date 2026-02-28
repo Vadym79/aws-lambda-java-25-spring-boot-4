@@ -11,7 +11,7 @@ Parameters:
     
 Globals:
   Function:
-    CodeUri: target/aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql-1.0.0-SNAPSHOT.jar
+    CodeUri: target/aws-serverless-java-container-aurora-dsql-1.0.0-SNAPSHOT.jar
     Runtime: java25
     Timeout: 30 
     MemorySize: 1024

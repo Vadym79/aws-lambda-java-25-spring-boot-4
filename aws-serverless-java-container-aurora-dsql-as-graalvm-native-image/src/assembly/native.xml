@@ -22,7 +22,7 @@
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<fileMode>0775</fileMode>
 			<includes>
-				<include>aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql-as-graalvm-native-image</include>
+				<include>aws-serverless-java-container-aurora-dsql-as-graalvm-native-image</include>
 				<!--
 				 <include>libaws-crt-jni.so</include>
 				-->

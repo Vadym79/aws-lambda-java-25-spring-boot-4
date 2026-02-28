@@ -9,7 +9,7 @@
 		<version>4.0.3</version>
 	</parent>
 	<groupId>software.amazonaws.example</groupId>
-	<artifactId>aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-aurora-dsql</artifactId>
+	<artifactId>aws-serverless-java-container-aurora-dsql</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>${packaging}</packaging>
 
