@@ -2,4 +2,4 @@
 
 cd ${LAMBDA_TASK_ROOT:-.}
 
-./aws-lambda-java-25-spring-boot-4.0-aws-serverless-java-container-dynamodb-as-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
+./aws-serverless-java-container-dynamodb-as-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
