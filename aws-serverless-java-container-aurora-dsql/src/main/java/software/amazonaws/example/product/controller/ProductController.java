@@ -38,10 +38,12 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void createProduct(@RequestBody Product product) throws Exception {
+	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+	   produces = MediaType.TEXT_PLAIN_VALUE)
+	public String createProduct(@RequestBody Product product) throws Exception{
 		logger.info("entered createProduct method for product " + product);
 		productDao.save(product);
 		logger.info("created product with id " + product.getId());
+		return "Product with id: "+ product.getId() + " created ";
 	}
 }

@@ -122,7 +122,7 @@ Resources:
                  - !Sub arn:${AWS::Partition}:dsql:${AWS::Region}:${AWS::AccountId}:cluster/${DSQL}
 
       Events:
-        PutRequest:
+        PostRequest:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi

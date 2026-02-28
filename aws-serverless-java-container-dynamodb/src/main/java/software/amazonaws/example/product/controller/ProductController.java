@@ -38,10 +38,12 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void createProduct(@RequestBody Product product) {
+	@RequestMapping(path = "/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+	   produces = MediaType.TEXT_PLAIN_VALUE)
+	public String createProduct(@RequestBody Product product) {
 		logger.info("entered createProduct method with id " + product.id());
 		productDao.createProduct(product);
 		logger.info("created product with id " + product.id());
+		return "Product with id: "+ product.id() + " created ";
 	}
 }
