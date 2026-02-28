@@ -1,9 +1,6 @@
 package software.amazonaws;
 
-import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS;
-import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_METHODS;
-import static org.springframework.aot.hint.MemberCategory.ACCESS_PUBLIC_FIELDS;
-import static org.springframework.aot.hint.MemberCategory.ACCESS_DECLARED_FIELDS;
+import static org.springframework.aot.hint.MemberCategory.*;
 
 import java.util.HashSet;
 
@@ -18,12 +15,12 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import software.amazonaws.example.product.entity.Product;
 import software.amazonaws.example.product.entity.Products;
-
+import software.amazonaws.example.product.handler.StreamLambdaHandler;
 
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class, Products.class})
+	Product.class, Products.class, StreamLambdaHandler.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 
@@ -40,6 +37,10 @@ public class ApplicationConfiguration {
                     ).registerType(
                             Products.class,
                             ACCESS_PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS
+                    ).registerType(
+                    		StreamLambdaHandler.class, UNSAFE_ALLOCATED, ACCESS_DECLARED_FIELDS, ACCESS_PUBLIC_FIELDS,  
+                    		INVOKE_DECLARED_METHODS, INVOKE_PUBLIC_METHODS, 
+                    		INVOKE_PUBLIC_CONSTRUCTORS, INVOKE_DECLARED_CONSTRUCTORS
                     );
         }
     }
