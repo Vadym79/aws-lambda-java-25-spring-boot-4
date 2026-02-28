@@ -11,8 +11,8 @@ Parameters:
     
 Globals:
   Function:
-    #Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler
-    Handler: software.amazonaws.example.product.handler.StreamLambdaHandler 
+    Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler
+    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandler 
     CodeUri: target/function.zip
     Runtime: provided.al2023
     Timeout: 30 
