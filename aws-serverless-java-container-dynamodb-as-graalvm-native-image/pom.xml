@@ -144,8 +144,9 @@
 						<configuration>
 							<mainClass>software.amazonaws.Application</mainClass>
 							<buildArgs>
-								--enable-url-protocols=http
-								-H:+AddAllCharsets
+				               <buildArg> --no-fallback </buildArg>
+				               <buildArg> --enable-http </buildArg>
+				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
 							</buildArgs>
 						</configuration>
 						<executions>
