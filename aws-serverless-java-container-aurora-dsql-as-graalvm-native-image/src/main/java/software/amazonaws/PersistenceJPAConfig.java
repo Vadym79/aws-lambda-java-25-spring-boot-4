@@ -34,9 +34,9 @@ public class PersistenceJPAConfig {
 	private static final String PACKAGE_TO_SCAN_FOR_ENTITIES= "software.amazonaws.example.product.entity";
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(PersistenceManagedTypes persistenceManagedTypes) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(PersistenceManagedTypes persistenceManagedTypes, DataSource dataSource) {
 		var em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
+		em.setDataSource(dataSource);
 		em.setPackagesToScan(PACKAGE_TO_SCAN_FOR_ENTITIES);
 		em.setManagedTypes(persistenceManagedTypes);
 
@@ -70,9 +70,9 @@ public class PersistenceJPAConfig {
     }
 	
 	@Bean
-	public PlatformTransactionManager transactionManager(PersistenceManagedTypes persistenceManagedTypes) {
+	public PlatformTransactionManager transactionManager(PersistenceManagedTypes persistenceManagedTypes, DataSource datasource) {
 		var transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory(persistenceManagedTypes).getObject());
+		transactionManager.setEntityManagerFactory(entityManagerFactory(persistenceManagedTypes, datasource).getObject());
 		return transactionManager;
 	}
 
@@ -80,5 +80,4 @@ public class PersistenceJPAConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-
 }
