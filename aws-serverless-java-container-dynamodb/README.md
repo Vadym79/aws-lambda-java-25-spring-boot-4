@@ -1,4 +1,4 @@
-# Example of Lambda with managed Java 25 runtime using Spring Boot 4 with AWS Serverless Java Containerand Amazon DynamoDB  
+# Example of Lambda with managed Java 25 runtime using Spring Boot 4 with AWS Serverless Java Container and Amazon DynamoDB  
 
 
 ## Architecture
@@ -14,7 +14,7 @@
 
 ## Clone git repository locally  
 
-git clone https://github.com/Vadym79/aws-lambda-java-25.git   
+git clone https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git   
 
 ## Switch to aws-serverless-java-container-dynamodb directory   
 
