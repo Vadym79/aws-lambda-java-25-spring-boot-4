@@ -18,6 +18,8 @@ import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import com.amazonaws.services.lambda.runtime.serialization.events.LambdaEventSerializers;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import software.amazonaws.Application;
 
@@ -25,6 +27,8 @@ import software.amazonaws.Application;
 public class StreamLambdaHandlerWithFullPriming implements RequestStreamHandler, Resource {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StreamLambdaHandlerWithFullPriming.class);
+	private static final ObjectMapper objectMapper = new ObjectMapper();
+
 	
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
     static {
@@ -37,7 +41,6 @@ public class StreamLambdaHandlerWithFullPriming implements RequestStreamHandler,
     }
     
     
-	
 	public StreamLambdaHandlerWithFullPriming () {
 		Core.getGlobalContext().register(this);
 	}
@@ -53,7 +56,11 @@ public class StreamLambdaHandlerWithFullPriming implements RequestStreamHandler,
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
 		 logger.info("Before Checkpoint");
-		 handler.proxy(getAwsProxyRequest(), new MockLambdaContext());
+		 
+		 //AwsProxyRequest requestEvent=getAwsProxyRequest();
+		 AwsProxyRequest requestEvent = LambdaEventSerializers.serializerFor(AwsProxyRequest.class, StreamLambdaHandlerWithFullPriming.class.getClassLoader())
+					.fromJson(getAwsProxyRequestAsJson());
+		 handler.proxy(requestEvent, new MockLambdaContext());
 		 
 		 /*
 		 handler.proxyStream(new ByteArrayInputStream(getAwsProxyRequest().getBytes(StandardCharsets.UTF_8)), 
@@ -66,6 +73,11 @@ public class StreamLambdaHandlerWithFullPriming implements RequestStreamHandler,
 	public void afterRestore(org.crac.Context<? extends Resource> context) throws Exception {
 		logger.info("After Restore");	
 	}
+	
+    private static String getAwsProxyRequestAsJson() throws Exception{
+    	AwsProxyRequest proxyRequestEvent= getAwsProxyRequest();
+    	return objectMapper.writeValueAsString(proxyRequestEvent);		
+    }
 	
     private static AwsProxyRequest getAwsProxyRequest () {
     	final AwsProxyRequest awsProxyRequest = new AwsProxyRequest ();

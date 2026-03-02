@@ -9,6 +9,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import org.springframework.orm.jpa.persistenceunit.PersistenceManagedTypes;
+import org.springframework.orm.jpa.persistenceunit.PersistenceManagedTypesScanner;
+import org.springframework.core.io.ResourceLoader;
+
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -16,7 +20,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableTransactionManagement
 public class PersistenceJPAConfig {
 	
@@ -27,12 +31,14 @@ public class PersistenceJPAConfig {
 			+ ":5432/postgres?sslmode=verify-full&sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory"
 			+ "&token-duration-secs=900";
 
+	private static final String PACKAGE_TO_SCAN_FOR_ENTITIES= "software.amazonaws.example.product.entity";
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(PersistenceManagedTypes persistenceManagedTypes, DataSource dataSource) {
 		var em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan("software.amazonaws.example.product.entity");
+		em.setDataSource(dataSource);
+		em.setPackagesToScan(PACKAGE_TO_SCAN_FOR_ENTITIES);
+		em.setManagedTypes(persistenceManagedTypes);
 
 		var vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -56,10 +62,17 @@ public class PersistenceJPAConfig {
 		return new HikariDataSource(config);
 	}
 
+	
+    @Bean
+    public PersistenceManagedTypes persistenceManagedTypes(ResourceLoader resourceLoader) {
+        return new PersistenceManagedTypesScanner(resourceLoader)
+                .scan(PACKAGE_TO_SCAN_FOR_ENTITIES);
+    }
+	
 	@Bean
-	public PlatformTransactionManager transactionManager() {
+	public PlatformTransactionManager transactionManager(PersistenceManagedTypes persistenceManagedTypes, DataSource datasource) {
 		var transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+		transactionManager.setEntityManagerFactory(entityManagerFactory(persistenceManagedTypes, datasource).getObject());
 		return transactionManager;
 	}
 
@@ -67,5 +80,4 @@ public class PersistenceJPAConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-
 }
