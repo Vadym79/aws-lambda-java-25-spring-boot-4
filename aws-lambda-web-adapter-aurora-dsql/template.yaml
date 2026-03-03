@@ -16,8 +16,8 @@ Globals:
     Runtime: java25
     Timeout: 60 
     MemorySize: 1024
-    #SnapStart:
-      #ApplyOn: PublishedVersions       
+    SnapStart:
+      ApplyOn: PublishedVersions       
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application

@@ -65,13 +65,7 @@
                        <artifactId>jul-to-slf4j</artifactId>
                 </exclusion>     
 			</exclusions>
-
 		</dependency>
-		<dependency>
-			<groupId>com.amazonaws.serverless</groupId>
-            <artifactId>aws-serverless-java-container-springboot4</artifactId>
-            <version>3.0.0</version>		
-        </dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-core</artifactId>
@@ -117,12 +111,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-lambda-java-serialization</artifactId>
-			<version>1.2.0</version>
-            <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
