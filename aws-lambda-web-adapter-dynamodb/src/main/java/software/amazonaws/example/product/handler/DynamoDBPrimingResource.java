@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@Configuration
+//@Configuration
 public class DynamoDBPrimingResource implements Resource {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DynamoDBPrimingResource.class);
 	    
-	@Autowired
+	//@Autowired
 	private ProductDao productDao;
 	
 	public DynamoDBPrimingResource () {

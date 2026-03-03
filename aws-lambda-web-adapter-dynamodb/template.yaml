@@ -119,7 +119,7 @@ Resources:
       FunctionName: PostProductWithJava25SpringBoot40AWSLWADynamoDB
       AutoPublishAlias: liveVersion
       Layers:
-        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:26
+        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:23
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
@@ -144,7 +144,7 @@ Resources:
       FunctionName: GetProductByIdWithJava25SpringBoot40AWSLWADynamoDB
       AutoPublishAlias: liveVersion
       Layers:
-         - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:26
+         - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:23
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref ProductsTable
