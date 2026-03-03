@@ -13,10 +13,11 @@ Globals:
   Function:
     Handler: run.sh
     CodeUri: target/aws-lambda-web-adapter-aurora-dsql-1.0.0-SNAPSHOT.jar
+    Runtime: java25
     Timeout: 60 
     MemorySize: 1024
-    SnapStart:
-      ApplyOn: PublishedVersions       
+    #SnapStart:
+      #ApplyOn: PublishedVersions       
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application
@@ -25,6 +26,7 @@ Globals:
         RUST_LOG: info
         REMOVE_BASE_PATH: /v1
         AWS_LAMBDA_EXEC_WRAPPER: /opt/bootstrap
+        
 
 Resources:
   MyApi:
@@ -117,6 +119,8 @@ Resources:
     Properties:
       FunctionName: PostProductWithJava25SpringBoot40AWSLWADSQL
       AutoPublishAlias: liveVersion
+      Layers:
+        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:26
       Policies:
         - Version: '2012-10-17' # Policy Document
           Statement:
@@ -146,6 +150,8 @@ Resources:
     Properties:
       FunctionName: GetProductByIdWithJava25SpringBoot40AWSLWADSQL
       AutoPublishAlias: liveVersion
+      Layers:
+        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:26
       Policies:
         - Version: '2012-10-17' # Policy Document
           Statement:
