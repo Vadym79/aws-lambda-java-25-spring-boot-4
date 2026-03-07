@@ -15,8 +15,8 @@ Globals:
     Runtime: java25
     Timeout: 60 
     MemorySize: 1024
-    #SnapStart:
-      #ApplyOn: PublishedVersions       
+    SnapStart:
+      ApplyOn: PublishedVersions       
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application
@@ -196,7 +196,7 @@ Resources:
   GetProductByIdFunctiondWithDSQLPrimingLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithFullPrimingFunction}"
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithDSQLPrimingFunction}"
       RetentionInDays: 7
 
 
@@ -205,7 +205,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithFullPriming::handleRequest
-      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCSJDBCDSQLSJDBCFullPriming
+      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCDSQLSJDBCFullPriming
       AutoPublishAlias: liveVersion
       Policies:
           Statement:

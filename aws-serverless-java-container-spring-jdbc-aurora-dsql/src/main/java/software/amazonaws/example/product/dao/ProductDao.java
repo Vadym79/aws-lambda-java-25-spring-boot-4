@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,7 +15,7 @@ import software.amazonaws.example.product.entity.Product;
 public class ProductDao {
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	/**
 	 * create a product and return its id
@@ -24,9 +25,9 @@ public class ProductDao {
 	 */
 	public int createProduct(Product product) throws Exception {
 		var productSequenceNextValQuery = "SELECT nextval('product_id')";
-		var id = this.jdbcTemplate.queryForObject(productSequenceNextValQuery, Integer.class);
+		var id = this.getJDBCTemplate().queryForObject(productSequenceNextValQuery, Integer.class);
 		var createProductQuery = "INSERT INTO products VALUES (?, ?, ?)";
-		this.jdbcTemplate.update(createProductQuery, id, product.name(), product.price());
+		this.getJDBCTemplate().update(createProductQuery, id, product.name(), product.price());
 		return id;
 	}
 
@@ -39,21 +40,24 @@ public class ProductDao {
 	 */
 	public Optional<Product> getProductById(int id) throws Exception {
 		var findProductByIdQuery = "SELECT * FROM products WHERE id = ?";
-		return this.jdbcTemplate.queryForObject(findProductByIdQuery, new ProductMapper(), id);
+		try {
+			return this.getJDBCTemplate().queryForObject(findProductByIdQuery, new ProductMapper(), id);
+		  } catch (EmptyResultDataAccessException e) {
+			return Optional.empty();
+		}
 	}
 
+	private JdbcTemplate getJDBCTemplate() {
+		return this.jdbcTemplate !=null ?this.jdbcTemplate:new JdbcTemplate(DsqlDataSourceConfig.datasource);
+	}
 	private static class ProductMapper implements RowMapper<Optional<Product>> {
 
 		@Override
 		public Optional<Product> mapRow(ResultSet rs, int rowNum) throws SQLException {
-			if (rs != null) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int price = rs.getInt("price");
-				return Optional.of(new Product(id, name, price));
-			} else {
-				return Optional.empty();
-			}
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			int price = rs.getInt("price");
+			return Optional.of(new Product(id, name, price));
 		}
 	}
 }

@@ -17,16 +17,24 @@ public class DsqlDataSourceConfig {
 	private static final String JDBC_URL = "jdbc:aws-dsql:postgresql://" + AURORA_DSQL_CLUSTER_ENDPOINT
 			+ ":5432/postgres?sslmode=verify-full&sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory"
 			+ "&token-duration-secs=900";
+	
+	static DataSource datasource;
+	static {
+	   var config = new HikariConfig();
+	   config.setUsername("admin");
+	   config.setJdbcUrl(JDBC_URL);
+	   config.setMaxLifetime(1500 * 1000); // pool connection expiration time in milli seconds, default 30
+	   config.setMaximumPoolSize(1); // default is 10
+	   datasource= new HikariDataSource(config);
+	}
 
 	@Bean
 	public DataSource dataSource() {
-
-		var config = new HikariConfig();
-		config.setUsername("admin");
-		config.setJdbcUrl(JDBC_URL);
-		config.setMaxLifetime(1500 * 1000); // pool connection expiration time in milli seconds, default 30
-		config.setMaximumPoolSize(1); // default is 10
-		return new HikariDataSource(config);
+		return datasource;
+	}
+	
+	DataSource getDataSource() {
+		return datasource;
 	}
 
 }

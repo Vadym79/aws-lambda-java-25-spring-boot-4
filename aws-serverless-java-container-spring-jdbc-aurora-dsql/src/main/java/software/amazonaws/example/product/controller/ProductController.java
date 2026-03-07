@@ -42,8 +42,8 @@ public class ProductController {
 	   produces = MediaType.TEXT_PLAIN_VALUE)
 	public String createProduct(@RequestBody Product product) throws Exception{
 		logger.info("entered createProduct method for product " + product);
-		productDao.createProduct(product);
-		logger.info("created product with id " + product.id());
-		return "Product with id: "+ product.id() + " created ";
+		int id=productDao.createProduct(product);
+		logger.info("created product with id " + id);
+		return "Product with id: "+ id + " created ";
 	}
 }

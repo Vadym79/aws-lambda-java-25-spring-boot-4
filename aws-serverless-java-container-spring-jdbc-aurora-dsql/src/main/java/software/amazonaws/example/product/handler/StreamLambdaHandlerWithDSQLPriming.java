@@ -37,8 +37,8 @@ public class StreamLambdaHandlerWithDSQLPriming implements RequestStreamHandler,
         }
     }
         
-    @Autowired
-	private ProductDao productDao;
+    
+	private ProductDao productDao=new ProductDao() ;
 	
 	public StreamLambdaHandlerWithDSQLPriming () {
 		Core.getGlobalContext().register(this);
