@@ -16,8 +16,8 @@ Globals:
     Runtime: java25
     Timeout: 30 
     MemorySize: 1024
-    #SnapStart:
-      #ApplyOn: PublishedVersions       
+    SnapStart:
+      ApplyOn: PublishedVersions       
     Environment:
       Variables:
         REGION: !Sub ${AWS::Region}

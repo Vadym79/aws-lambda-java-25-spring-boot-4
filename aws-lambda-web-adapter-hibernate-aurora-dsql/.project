@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AWSLambdaJava25SpringBoot4.0AWSLambdaWebAdapterAuroraDSQL</name>
+	<name>AWSLambdaJava25SpringBoot4.0AWSLambdaWebAdapterHibernateAuroraDSQL</name>
 	<comment></comment>
 	<projects>
 	</projects>

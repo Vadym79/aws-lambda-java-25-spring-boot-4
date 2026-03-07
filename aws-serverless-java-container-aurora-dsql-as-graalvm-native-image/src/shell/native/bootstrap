@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd ${LAMBDA_TASK_ROOT:-.}
-
-./aws-serverless-java-container-aurora-dsql-as-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
