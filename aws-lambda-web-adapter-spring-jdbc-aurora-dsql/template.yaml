@@ -34,7 +34,7 @@ Resources:
     DependsOn: MyApiCWLRoleArn 
     Properties:
       StageName: !Ref Stage
-      Name: AWSLambdaSpringBoot40AWSLambdaWebAdapterDSQLAPI
+      Name: AWSLambdaSpringBoot40AWSLambdaWebAdapterSpringJDBCDSQLAPI
       Description: Product API using AWS Lambda Java 25, Spring Boot 4.0, AWS Lambda Web Adapter, Spring JDBC and Aurora DSQL
       AccessLogSetting:
         DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
