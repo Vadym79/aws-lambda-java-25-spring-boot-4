@@ -33,13 +33,14 @@ public class GetProductByIdWithDynamoDBPrimingHandler implements Function<APIGat
     private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithDynamoDBPrimingHandler.class);
 	
 	public GetProductByIdWithDynamoDBPrimingHandler () {
-		Core.getGlobalContext().register(this);
+		 Core.getGlobalContext().register(this);
 	}
 	
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
-		 logger.info("entered beforeCheckpoint method for priming");
+		 logger.info("entered beforeCheckpoint method for DynamoDB priming");
 		 productDao.getProduct("0");
+		 logger.info("finished DynamoDB priming");
 	}
 
 	@Override

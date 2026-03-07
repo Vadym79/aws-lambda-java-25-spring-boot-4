@@ -42,14 +42,15 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
     private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithFullPrimingHandler.class);
 	
 	public GetProductByIdWithFullPrimingHandler () {
-		Core.getGlobalContext().register(this);
+		//Core.getGlobalContext().register(this);
 	}
 	
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
-		 logger.info("entered beforeCheckpoint method for priming");
+		 logger.info("entered beforeCheckpoint method for full priming");
 		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(this.getAPIGatewayProxyRequestEventAsJson().getBytes(StandardCharsets.UTF_8)), 
 				 new ByteArrayOutputStream(), new MockLambdaContext());
+		 logger.info("finished full priming");
 	}
 
 	@Override

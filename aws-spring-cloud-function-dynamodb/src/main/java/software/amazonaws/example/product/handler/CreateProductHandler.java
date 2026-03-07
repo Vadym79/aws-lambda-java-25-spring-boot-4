@@ -29,6 +29,7 @@ public class CreateProductHandler implements Function<APIGatewayProxyRequestEven
   public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
 		try {
 			String requestBody = requestEvent.getBody();
+			
 			Product product = objectMapper.readValue(requestBody, Product.class);
 			productDao.createProduct(product);
 			

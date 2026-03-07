@@ -16,8 +16,6 @@ Globals:
     Runtime: java25
     Timeout: 30 
     MemorySize: 1024
-    #SnapStart:
-      #ApplyOn: PublishedVersions       
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application
@@ -114,6 +112,8 @@ Resources:
   PostProductFunction:
     Type: AWS::Serverless::Function
     Properties:
+      SnapStart:
+        ApplyOn: PublishedVersions 
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: createProductHandler
@@ -140,6 +140,8 @@ Resources:
   GetProductByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
+      SnapStart:
+        ApplyOn: PublishedVersions  
       Environment:
          Variables:
             SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
@@ -166,6 +168,8 @@ Resources:
   GetProductByIdWithDynamoDBPrimingFunction:
     Type: AWS::Serverless::Function
     Properties:
+      SnapStart:
+        ApplyOn: PublishedVersions  
       Environment:
          Variables:
             SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBPrimingHandler
