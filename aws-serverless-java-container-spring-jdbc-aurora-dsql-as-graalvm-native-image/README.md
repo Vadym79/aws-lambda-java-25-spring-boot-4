@@ -1,4 +1,4 @@
-# Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Serverless Java Container, Hibernate as an ORM framework, Hikari Connection Pool and Amazon Aurora DSQL database  
+# Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Serverless Java Container, Spring JDBC, Hikari Connection Pool and Amazon Aurora DSQL database  
 
 
 ## Architecture
