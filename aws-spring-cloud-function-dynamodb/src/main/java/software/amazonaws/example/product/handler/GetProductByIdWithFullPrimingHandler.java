@@ -60,11 +60,9 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
     	proxyRequestEvent.setPathParameters(Map.of("id","0"));
         
     	proxyRequestEvent.setResource("/productsWithFullPriming/{id}");
-        
-    	/*
     	proxyRequestEvent.setPath("/productsWithFullPriming/0");
     
-       
+        /* 
     	final ProxyRequestContext proxyRequestContext = new ProxyRequestContext();
     	final RequestIdentity requestIdentity= new RequestIdentity();
     	requestIdentity.setApiKey("blabla");
