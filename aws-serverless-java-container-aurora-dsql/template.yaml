@@ -197,7 +197,7 @@ Resources:
   GetProductByIdFunctiondWithDSQLPrimingLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithFullPrimingFunction}"
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithDSQLPrimingFunction}"
       RetentionInDays: 7
 
 
