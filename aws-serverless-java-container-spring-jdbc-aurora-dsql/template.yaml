@@ -171,12 +171,41 @@ Resources:
       RetentionInDays: 7
 
 
+  GetProductByIdWithDSQLPrimingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithDSQLPriming::handleRequest
+      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCDSQLSJDBCDSQLPriming
+      AutoPublishAlias: liveVersion
+      Policies:
+          Statement:
+            - Effect: Allow
+              Action:
+                - dsql:DbConnectAdmin
+              Resource: 
+                 - !Sub arn:${AWS::Partition}:dsql:${AWS::Region}:${AWS::AccountId}:cluster/${DSQL}
+      Events:
+        GetRequestById:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /productsWithAuroraDSQLPriming/{id}
+            Method: get            
+            
+
+  GetProductByIdFunctiondWithDSQLPrimingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithFullPrimingFunction}"
+      RetentionInDays: 7
+
+
 
   GetProductByIdWithFullPrimingFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithFullPriming::handleRequest
-      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCSJDBCDSQLAndFullPriming
+      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSJCSJDBCDSQLSJDBCFullPriming
       AutoPublishAlias: liveVersion
       Policies:
           Statement:
