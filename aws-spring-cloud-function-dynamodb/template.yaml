@@ -97,7 +97,7 @@ Resources:
       Description: "AWSLambdaJava25SpringBoot40AWSSCFDynamoDB API Key"
       Enabled: true
       GenerateDistinctId: false
-      Value: a6ZbcDefQW12BN56WEI40
+      Value: a6ZbcDefQW12BN56WEI40SCF
       StageKeys:
         - RestApiId: !Ref MyApi
           StageName: !Ref Stage
@@ -114,6 +114,7 @@ Resources:
   PostProductFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: createProductHandler
       FunctionName: PostProductWithJava25SpringBoot40AWSSCFDynamoDB
@@ -139,9 +140,9 @@ Resources:
   GetProductByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
-       Environment:
-        Variables:
-           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
+      Environment:
+         Variables:
+            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
       FunctionName: GetProductByIdWithJava25SpringBoot40AWSSCFDynamoDB
       AutoPublishAlias: liveVersion
       Policies:
@@ -165,8 +166,9 @@ Resources:
   GetProductByIdWithDynamoDBPrimingFunction:
     Type: AWS::Serverless::Function
     Properties:
-        Variables:
-           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBPrimingHandler
+      Environment:
+         Variables:
+            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBPrimingHandler
       FunctionName: GetProductByIdWithJava25SpringBoot40AWSSCFDynamoDBAndDDBPriming
       AutoPublishAlias: liveVersion
       Policies:
@@ -190,8 +192,9 @@ Resources:
   GetProductByIdWithFullPrimingFunction:
     Type: AWS::Serverless::Function
     Properties:
-        Variables:
-           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithFullPrimingHandler
+      Environment:
+         Variables:
+            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithFullPrimingHandler
       FunctionName: GetProductByIdWithJava25SpringBoot40AWSSCFDynamoDBAndFullPriming
       AutoPublishAlias: liveVersion
       Policies:
