@@ -51,6 +51,28 @@
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+		    <exclusions>
+		       <exclusion>
+                       <groupId>ch.qos.logback</groupId>
+                       <artifactId>logback-classic</artifactId>
+                </exclusion>
+                 <exclusion>
+                       <groupId>ch.qos.logback</groupId>
+                       <artifactId>logback-core</artifactId>
+                 </exclusion>
+                 <exclusion>
+                       <groupId>org.apache.logging.log4j</groupId>
+                       <artifactId>log4j-api</artifactId>
+                 </exclusion>     
+                 <exclusion>
+                       <groupId>org.apache.logging.log4j</groupId>
+                       <artifactId>log4j-to-slf4j</artifactId>                 
+                 </exclusion>     
+                <exclusion>
+                       <groupId>org.slf4j</groupId>
+                       <artifactId>jul-to-slf4j</artifactId>
+                </exclusion>     
+			</exclusions>
         </dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
@@ -156,7 +178,6 @@
 				               <buildArg> --no-fallback </buildArg>
 				               <buildArg> --enable-http </buildArg>
 				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
-				               <buildArg> -H:Preserve=package=org.hibernate.event.spi</buildArg>
 							</buildArgs>
 							<classpath>
 								<param>
