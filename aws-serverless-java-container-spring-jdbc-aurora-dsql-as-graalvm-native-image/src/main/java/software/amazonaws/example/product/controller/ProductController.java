@@ -25,11 +25,11 @@ public class ProductController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-	@RequestMapping(path = {"/products/{id}"}, 
+	@RequestMapping(path = {"/products/{id}","/productsWithAuroraDSQLPriming/{id}", "/productsWithFullPriming/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Optional<Product> getProductById(@PathVariable("id") int id) throws Exception {
 		logger.info("entered getProductById method with id " + id);
-		Optional<Product> optionalProduct = productDao.findById(id);
+		Optional<Product> optionalProduct = productDao.getProductById(id);
 		if (optionalProduct.isPresent())
 			logger.info(" product : " + optionalProduct.get());
 		else
@@ -42,8 +42,8 @@ public class ProductController {
 	   produces = MediaType.TEXT_PLAIN_VALUE)
 	public String createProduct(@RequestBody Product product) throws Exception{
 		logger.info("entered createProduct method for product " + product);
-		productDao.save(product);
-		logger.info("created product with id " + product.getId());
-		return "Product with id: "+ product.getId() + " created ";
+		int id=productDao.createProduct(product);
+		logger.info("created product with id " + id);
+		return "Product with id: "+ id + " created ";
 	}
 }
