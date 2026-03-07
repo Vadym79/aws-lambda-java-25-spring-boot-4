@@ -20,6 +20,10 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.ProxyRequestContext;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.RequestIdentity;
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import software.amazon.awssdk.http.HttpStatusCode;
@@ -59,8 +63,10 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
     	proxyRequestEvent.setHttpMethod("GET");
     	proxyRequestEvent.setPathParameters(Map.of("id","0"));
         
-    	/* 
+    	 
     	proxyRequestEvent.setResource("/productsWithFullPriming/{id}");
+    	
+    	
     	proxyRequestEvent.setPath("/productsWithFullPriming/0");
     
         
@@ -69,7 +75,7 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
     	requestIdentity.setApiKey("blabla");
     	proxyRequestContext.setIdentity(requestIdentity);
     	proxyRequestEvent.setRequestContext(proxyRequestContext);
-    	*/
+    	
     	return objectMapper.writeValueAsString(proxyRequestEvent);		
     }
 
