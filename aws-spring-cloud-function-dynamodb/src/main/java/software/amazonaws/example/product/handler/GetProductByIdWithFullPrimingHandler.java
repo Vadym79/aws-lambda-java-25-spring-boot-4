@@ -31,7 +31,7 @@ import software.amazonaws.example.product.dao.ProductDao;
 import software.amazonaws.example.product.entity.Product;
 
 @Component
-public class GetProductByIdWithFullPrimingHandler implements Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>, Resource {
+public class GetProductByIdWithFullPrimingHandler implements Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 	@Autowired
 	private ProductDao productDao;
@@ -40,7 +40,8 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
 	private ObjectMapper objectMapper;
 	
     private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithFullPrimingHandler.class);
-	
+ 	
+    /*
 	public GetProductByIdWithFullPrimingHandler () {
 		//Core.getGlobalContext().register(this);
 	}
@@ -57,7 +58,7 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
 	public void afterRestore(org.crac.Context<? extends Resource> context) throws Exception {	
 	
 	}
-	
+	*/
 	
     private String getAPIGatewayProxyRequestEventAsJson() throws Exception{
     	final APIGatewayProxyRequestEvent proxyRequestEvent = new APIGatewayProxyRequestEvent ();
@@ -66,17 +67,15 @@ public class GetProductByIdWithFullPrimingHandler implements Function<APIGateway
         
     	 
     	proxyRequestEvent.setResource("/productsWithFullPriming/{id}");
-    	
-    	
     	proxyRequestEvent.setPath("/productsWithFullPriming/0");
     
-        
+        /*
     	final ProxyRequestContext proxyRequestContext = new ProxyRequestContext();
     	final RequestIdentity requestIdentity= new RequestIdentity();
     	requestIdentity.setApiKey("blabla");
     	proxyRequestContext.setIdentity(requestIdentity);
     	proxyRequestEvent.setRequestContext(proxyRequestContext);
-    	
+    	*/
     	return objectMapper.writeValueAsString(proxyRequestEvent);		
     }
 

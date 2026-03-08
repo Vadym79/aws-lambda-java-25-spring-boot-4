@@ -22,7 +22,7 @@ import software.amazonaws.example.product.dao.ProductDao;
 import software.amazonaws.example.product.entity.Product;
 
 @Component
-public class GetProductByIdWithDynamoDBPrimingHandler implements Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>, Resource {
+public class GetProductByIdWithDynamoDBPrimingHandler implements Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 	@Autowired
 	private ProductDao productDao;
@@ -32,6 +32,7 @@ public class GetProductByIdWithDynamoDBPrimingHandler implements Function<APIGat
 
     private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithDynamoDBPrimingHandler.class);
 	
+	/*
 	public GetProductByIdWithDynamoDBPrimingHandler () {
 		 Core.getGlobalContext().register(this);
 	}
@@ -47,6 +48,7 @@ public class GetProductByIdWithDynamoDBPrimingHandler implements Function<APIGat
 	public void afterRestore(org.crac.Context<? extends Resource> context) throws Exception {	
 	
 	}
+	*/
 	
 	public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
 		String id = requestEvent.getPathParameters().get("id");

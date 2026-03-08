@@ -16,6 +16,8 @@ Globals:
     Runtime: java25
     Timeout: 30 
     MemorySize: 1024
+    SnapStart:
+      ApplyOn: PublishedVersions  
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application
@@ -112,8 +114,6 @@ Resources:
   PostProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      SnapStart:
-        ApplyOn: PublishedVersions 
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: createProductHandler
@@ -140,8 +140,6 @@ Resources:
   GetProductByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
-      SnapStart:
-        ApplyOn: PublishedVersions  
       Environment:
          Variables:
             SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
@@ -162,60 +160,6 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub "/aws/lambda/${GetProductByIdFunction}"
-      RetentionInDays: 7
-
-
-  GetProductByIdWithDynamoDBPrimingFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      SnapStart:
-        ApplyOn: PublishedVersions  
-      Environment:
-         Variables:
-            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBPrimingHandler
-      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSCFDynamoDBAndDDBPriming
-      AutoPublishAlias: liveVersion
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref ProductsTable
-      Events:
-        GetRequestById:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /productsWithDynamoDBPriming/{id}
-            Method: get            
-
-  GetProductByIdFunctiondWithDynamoDBPrimingLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithDynamoDBPrimingFunction}"
-      RetentionInDays: 7
-
-
-  GetProductByIdWithFullPrimingFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Environment:
-         Variables:
-            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithFullPrimingHandler
-      FunctionName: GetProductByIdWithJava25SpringBoot40AWSSCFDynamoDBAndFullPriming
-      AutoPublishAlias: liveVersion
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref ProductsTable
-      Events:
-        GetRequestById:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /productsWithFullPriming/{id}
-            Method: get            
-
-  GetProductByIdFunctiondWithFullPrimingLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithFullPrimingFunction}"
       RetentionInDays: 7
 
  
