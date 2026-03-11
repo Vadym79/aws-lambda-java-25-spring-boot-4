@@ -3,9 +3,6 @@
 
 package software.amazonaws.example.product.handler;
 
-import java.util.Optional;
-import java.util.function.Function;
-
 import org.crac.Core;
 import org.crac.Resource;
 import org.slf4j.Logger;
