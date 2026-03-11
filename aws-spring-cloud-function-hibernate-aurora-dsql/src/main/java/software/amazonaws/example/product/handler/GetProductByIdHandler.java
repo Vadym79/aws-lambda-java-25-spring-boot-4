@@ -30,7 +30,7 @@ public class GetProductByIdHandler implements Function<APIGatewayProxyRequestEve
 
 	public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
 		String id = requestEvent.getPathParameters().get("id");
-		Optional<Product> optionalProduct = productDao.findById(Integer.valueOf(0));
+		Optional<Product> optionalProduct = productDao.findById(Integer.valueOf(id));
 		try {
 			if (optionalProduct.isEmpty()) {
 				logger.info(" product with id " + id + " not found ");

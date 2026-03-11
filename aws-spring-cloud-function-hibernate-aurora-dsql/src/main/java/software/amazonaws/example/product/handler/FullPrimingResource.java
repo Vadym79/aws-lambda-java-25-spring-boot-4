@@ -21,7 +21,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@Component
+//@Component
 public class FullPrimingResource implements  Resource {
 
 	

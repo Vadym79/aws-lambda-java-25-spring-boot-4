@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import software.amazonaws.example.product.dao.ProductDao;
 
-//@Component
+@Component
 public class DynamoDBPrimingResource implements Resource {
 
 	@Autowired
