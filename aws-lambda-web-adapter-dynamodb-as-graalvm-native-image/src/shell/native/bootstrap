@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ${LAMBDA_TASK_ROOT:-.}
+
+./aws-lambda-web-adapter-dynamodb-as-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
