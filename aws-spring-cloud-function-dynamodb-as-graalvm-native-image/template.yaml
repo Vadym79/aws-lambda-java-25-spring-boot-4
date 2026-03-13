@@ -12,7 +12,7 @@ Parameters:
 Globals:
   Function:
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
-    CodeUri: target/aws-spring-cloud-function-dynamodb-as-graalvm-native-image-1.0.0-SNAPSHOT.jar
+    CodeUri: target/function.zip
     Runtime: provided.al2023
     Timeout: 30 
     MemorySize: 1024
