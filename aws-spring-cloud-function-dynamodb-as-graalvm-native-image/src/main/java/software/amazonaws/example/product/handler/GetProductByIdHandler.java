@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 import software.amazon.awssdk.http.HttpStatusCode;
 import software.amazonaws.example.product.dao.ProductDao;

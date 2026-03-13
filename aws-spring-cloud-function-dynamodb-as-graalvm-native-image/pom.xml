@@ -89,10 +89,6 @@
 			<version>1.2.0</version>
             <scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -173,9 +169,7 @@
 		                     <buildArgs>
 				               <buildArg> --no-fallback </buildArg>
 				               <buildArg> --enable-http </buildArg>
-				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
-				               <buildArg> -H:Preserve=package=org.hibernate.event.spi</buildArg>
-							</buildArgs>
+				         	</buildArgs>
 							<classpath>
 								<param>
 									${project.build.directory}/${project.artifactId}-${project.version}.jar
