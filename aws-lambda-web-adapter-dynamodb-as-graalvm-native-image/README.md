@@ -1,4 +1,4 @@
-# Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Lambda Web Adapter and Amazon DynamoDB database  
+# CURRENTLY NOT WORKING Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Lambda Web Adapter and Amazon DynamoDB database  
 
 
 ## Architecture

@@ -23,9 +23,15 @@
 			<fileMode>0775</fileMode>
 			<includes>
 				<include>aws-lambda-web-adapter-dynamodb-as-graalvm-native-image</include>
-				<!--
-				 <include>libaws-crt-jni.so</include>
-				-->
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<fileMode>0775</fileMode>
+			<includes>
+				<include>run.sh</include>
 			</includes>
 		</fileSet>
 	</fileSets>

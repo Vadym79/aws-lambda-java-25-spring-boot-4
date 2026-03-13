@@ -151,7 +151,12 @@
 							<buildArgs>
 				               <buildArg> --no-fallback </buildArg>
 				               <buildArg> --enable-http </buildArg>
-							</buildArgs>
+				         	</buildArgs>
+							<classpath>
+								<param>
+									${project.build.directory}/${project.artifactId}-${project.version}.jar
+								</param>
+							</classpath>
 						</configuration>
 						<executions>
 							<execution>
