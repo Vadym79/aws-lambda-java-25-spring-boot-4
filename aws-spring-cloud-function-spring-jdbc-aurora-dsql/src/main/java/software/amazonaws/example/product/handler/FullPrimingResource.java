@@ -17,15 +17,14 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.ProxyRequestContext;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.RequestIdentity;
 
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 
 //@Component
 public class FullPrimingResource implements  Resource {
 
-	
-	@Autowired
-	private ObjectMapper objectMapper;
+   @Autowired 
+   private JsonMapper objectMapper;
 	
     private static final Logger logger = LoggerFactory.getLogger(FullPrimingResource.class);
 	

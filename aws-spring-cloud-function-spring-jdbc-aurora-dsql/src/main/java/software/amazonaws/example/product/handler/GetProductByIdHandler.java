@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import tools.jackson.databind.ObjectMapper;
-
+import tools.jackson.databind.json.JsonMapper;
 import software.amazon.awssdk.http.HttpStatusCode;
 import software.amazonaws.example.product.dao.ProductDao;
 import software.amazonaws.example.product.entity.Product;
@@ -25,8 +24,8 @@ public class GetProductByIdHandler implements Function<APIGatewayProxyRequestEve
 	@Autowired
 	private ProductDao productDao;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	@Autowired 
+	private JsonMapper objectMapper;
 
 
 	private static final Logger logger = LoggerFactory.getLogger(GetProductByIdHandler.class);

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import software.amazon.awssdk.http.HttpStatusCode;
 import software.amazonaws.example.product.dao.ProductDao;
@@ -23,13 +23,13 @@ public class CreateProductHandler implements Function<APIGatewayProxyRequestEven
   private ProductDao productDao;
   
   @Autowired 
-  private ObjectMapper objectMapper;
+  private JsonMapper objectMapper;
   
   @Override
   public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
 		try {
+			
 			String requestBody = requestEvent.getBody();
-	
 			Product product = objectMapper.readValue(requestBody, Product.class);
 			int id=productDao.createProduct(product);
 			
@@ -41,4 +41,4 @@ public class CreateProductHandler implements Function<APIGatewayProxyRequestEven
 					.withBody("Internal Server Error :: " + e.getMessage());
 		}
 	}
-  }
+}
