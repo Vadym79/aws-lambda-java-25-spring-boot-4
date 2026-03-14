@@ -1,0 +1,16 @@
+[
+  {
+    "name": "org.postgresql.Driver",
+    "allDeclaredFields":true,
+    "queryAllDeclaredMethods":true,
+    "queryAllDeclaredConstructors":true,
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  },
+  {
+    "name": "org.postgresql.ssl.DefaultJavaSSLFactory",
+    "allDeclaredFields":true,
+    "queryAllDeclaredMethods":true,
+    "queryAllDeclaredConstructors":true,
+    "methods":[{"name":"<init>","parameterTypes":["java.util.Properties"] }]
+  }
+]
