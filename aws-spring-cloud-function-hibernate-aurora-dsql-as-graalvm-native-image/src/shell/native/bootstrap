@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ${LAMBDA_TASK_ROOT:-.}
+
+./aws-spring-cloud-function-hibernate-aurora-dsql-as-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
