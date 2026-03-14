@@ -69,11 +69,7 @@
 					<groupId>org.slf4j</groupId>
 					<artifactId>jul-to-slf4j</artifactId>
 				</exclusion>
-				<exclusion>
-				    <groupId>io.netty</groupId>
-				    <artifactId>netty-buffer</artifactId>
-				</exclusion>
-		     </exclusions>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -103,10 +99,6 @@
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>jul-to-slf4j</artifactId>
-				</exclusion>
-			     <exclusion>
-				    <groupId>io.netty</groupId>
-				    <artifactId>netty-buffer</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
