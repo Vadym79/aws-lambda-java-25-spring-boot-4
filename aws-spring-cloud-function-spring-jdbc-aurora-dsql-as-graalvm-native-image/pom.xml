@@ -126,16 +126,6 @@
 			<artifactId>HikariCP</artifactId>
 			<version>7.0.2</version>
 		</dependency>
-
-		<dependency>
-			<groupId>io.github.crac</groupId>
-			<artifactId>org-crac</artifactId>
-			<version>0.1.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.crac</groupId>
-			<artifactId>crac</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
@@ -218,11 +208,13 @@
 				               <buildArg> --enable-http </buildArg>
 				               <buildArg> -H:ReflectionConfigurationFiles=src/main/reflect.json </buildArg>
 							</buildArgs>
+							<!--
 							<classpath>
 								<param>
 									${project.build.directory}/${project.artifactId}-${project.version}.jar
 								</param>
 							</classpath>
+							-->
 						</configuration>
 						<executions>
 							<execution>
