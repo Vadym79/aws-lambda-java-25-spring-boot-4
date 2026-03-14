@@ -25,7 +25,7 @@ sudo yum install maven
 ## install git and maven
 
 ## Clone git repository locally  
-git clone https://github.com/Vadym79/https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git 
+git clone https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git 
 
 ## Switch to aws-serverless-java-container-hibernate-aurora-dsql-as-graalvm-native-image directory   
 
