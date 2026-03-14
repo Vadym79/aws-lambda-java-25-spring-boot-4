@@ -11,6 +11,7 @@ Parameters:
     
 Globals:
   Function:
+    Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
     CodeUri: target/function.zip
     Runtime: provided.al2023
     Timeout: 60 
@@ -27,7 +28,7 @@ Resources:
     DependsOn: MyApiCWLRoleArn 
     Properties:
       StageName: !Ref Stage
-      Name: AWSLambdaSpringBoot40AWSSpringCloudFunctionDSQLAsGVNIAPI
+      Name: AWSLambdaSpringBoot40AWSSpringCloudFunctionHibernateDSQLAsGVNIAPI
       Description: Product API using AWS Lambda, Java 25, Spring Boot 4.0, AWS Spring Cloud Function, Hibernate and Aurora DSQL  As GraalVM Native Image
       AccessLogSetting:
         DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
