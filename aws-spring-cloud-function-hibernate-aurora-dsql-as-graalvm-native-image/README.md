@@ -1,10 +1,10 @@
-# Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Serverless Java Container, Hibernate as an ORM framework, Hikari Connection Pool and Amazon Aurora DSQL database  
+# Example of Lambda with Custom Runtime based on GraalVM Native Image with Java 25 using Spring Boot 4 with AWS Spring Cloud Function, Hibernate as an ORM framework, Hikari Connection Pool and Amazon Aurora DSQL database  
 
 
 ## Architecture
 
 <p align="center">
-  <img src="/aws-serverless-java-container-hibernate-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
+  <img src="/aws-spring-cloud-function-hibernate-aurora-dsql-as-graalvm-native-image/src/main/resources/img/app_arch.png" alt="Application Architecture"/>
 </p>
 
 ## Installation and deployment
@@ -25,9 +25,9 @@ sudo yum install maven
 ## install git and maven
 
 ## Clone git repository locally  
-git clone https://github.com/Vadym79/https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git 
+git clone https://github.com/Vadym79/aws-lambda-java-25-spring-boot-4.git 
 
-## Switch to aws-serverless-java-container-hibernate-aurora-dsql-as-graalvm-native-image directory   
+## Switch to aws-spring-cloud-function-hibernate-aurora-dsql-as-graalvm-native-image directory   
 
 ## Compile and package the Java application with Maven from the root (where pom.xml is located) of the project
 
