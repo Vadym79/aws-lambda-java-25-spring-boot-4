@@ -30,7 +30,7 @@ Resources:
     DependsOn: MyApiCWLRoleArn 
     Properties:
       StageName: !Ref Stage
-      Name: AWSLambdaSpringBoot40AWSSpringCloudFunctionDSQLAPI
+      Name: AWSLambdaSpringBoot40AWSSpringCloudFunctionHibernateDSQLAPI
       Description: Product API using AWS Lambda, Java 25, Spring Boot 4.0, AWS Spring Cloud Function, Hibernate and Aurora DSQL
       AccessLogSetting:
         DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
