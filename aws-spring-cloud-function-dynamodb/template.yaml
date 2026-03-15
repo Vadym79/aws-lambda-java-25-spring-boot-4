@@ -17,7 +17,7 @@ Globals:
     Timeout: 30 
     MemorySize: 1024
     SnapStart:
-      ApplyOn: PublishedVersions  
+     ApplyOn: PublishedVersions  
     Environment:
       Variables:
         MAIN_CLASS: software.amazonaws.Application
